@@ -1,22 +1,27 @@
 import speech_recognition as sr
 import pyttsx3
 import openai
+import os
 
 #Initializing pyttsx3
 listening = True
 engine = pyttsx3.init()
 
-#Set your openai api key and customizing the chatgpt role
-openai.api_key = "#"
+#Get environment variable to set the openai api key
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+#Customizing the chatgpt role
 messages = [{"role": "system", "content": "Your name is Skippy and give answers in 2 lines"}]
 
 #Customizing The output voice
 voices = engine.getProperty('voices')
 rate = engine.getProperty('rate')
 volume = engine.getProperty('volume')
+
 #Changing voice
 engine.setProperty('voice', voices[1].id)
 
+#Test the voice
 engine.say("Hello World!")
 engine.runAndWait()
 engine.stop()
